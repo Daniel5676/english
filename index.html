@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Nation - Connor Price</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* Header Styles */
+        .header {
+            background-color: #000;
+            color: white;
+            padding: 1rem 0;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #dc2626;
+        }
+        .header-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .icon:hover {
+            color: #dc2626;
+        }
+        /* Navigation Styles */
+        .nav {
+            background-color: #dc2626;
+            color: white;
+            padding: 1rem 0;
+        }
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .nav-menu {
+            margin-left: auto;
+            display: flex;
+            gap: 4px;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+        }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 400px;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a6390f77-1ed7-43d9-bd2a-cd488afe2822-IWyAsyqS8F8gg5N4WMxQqEhg9EViF1.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .hero-heart {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+        }
+        .hero-content {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 10;
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        /* Events Section */
+        .events {
+            padding: 2rem 0;
+        }
+        .events-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+        .tab {
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: none;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+        }
+        .tab.active {
+            border-bottom-color: #dc2626;
+            color: #dc2626;
+        }
+        .tab:not(.active) {
+            color: #6b7280;
+        }
+        .tab:hover:not(.active) {
+            color: #1f2937;
+        }
+        /* Event Card */
+        .event-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: box-shadow 0.3s;
+        }
+        .event-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .event-content {
+            display: flex;
+            align-items: center;
+        }
+        .event-date {
+            background-color: #f3f4f6;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 120px;
+        }
+        .event-month {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .event-day {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+        .event-year {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        .event-details {
+            flex: 1;
+            padding: 1.5rem;
+        }
+        .event-venue {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+        .event-artist {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        .event-time {
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+        .event-location {
+            color: #9ca3af;
+        }
+        .event-arrow {
+            padding: 1.5rem;
+            color: #dc2626;
+        }
+        /* Share Section */
+        .share {
+            margin-bottom: 2rem;
+        }
+        .share-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .share-btn {
+            padding: 0.5rem;
+            border: 1px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+        .share-btn.facebook {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+        .share-btn.facebook:hover {
+            background-color: #2563eb;
+        }
+        .share-btn.twitter {
+            background-color: #000;
+            border-color: #000;
+            color: white;
+        }
+        .share-btn.twitter:hover {
+            background-color: #374151;
+        }
+        .share-btn.other {
+            background-color: #6b7280;
+            border-color: #6b7280;
+            color: white;
+        }
+        .share-btn.other:hover {
+            background-color: #4b5563;
+        }
+        /* Category */
+        .category {
+            margin-bottom: 2rem;
+        }
+        .category-link {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .category-link:hover {
+            text-decoration: underline;
+        }
+        /* Footer */
+        .footer {
+            background-color: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem 0;
+        }
+        .footer-section {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .footer-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            padding: 0;
+        }
+        .footer-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .footer-plus {
+            width: 20px;
+            height: 20px;
+            color: #6b7280;
+            transition: transform 0.3s;
+        }
+        .footer-plus.rotated {
+            transform: rotate(45deg);
+        }
+        .footer-content {
+            margin-top: 1rem;
+            color: #6b7280;
+            display: none;
+        }
+        .footer-content.expanded {
+            display: block;
+        }
+        .country-section {
+            margin-bottom: 2rem;
+        }
+        .country-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: white;
+            color: #1f2937;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        .social-section {
+            margin-bottom: 2rem;
+        }
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            color: #4b5563;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .social-icon:hover {
+            color: #1f2937;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .event-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .event-date {
+                width: 100%;
+            }
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .share-buttons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">LIVE NATION</div>
+                <div class="header-icons">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="nav-link">Concerts & Events</a>
+                <a href="#" class="nav-link">Festivals</a>
+                <div class="nav-menu">
+                    <div class="nav-dot"></div>
+                    <div class="nav-dot"></div>
+                    <div class="nav-dot"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-heart">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(255,255,255,0.7);">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Connor Price</h1>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events">
+        <div class="container">
+            <h2 class="events-title">Events</h2>
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('uk', this)">UK & Ireland (1)</button>
+                <button class="tab" onclick="switchTab('international', this)">International (3)</button>
+            </div>
+            <!-- Event Card -->
+            <div class="event-card">
+                <div class="event-content">
+                    <div class="event-date">
+                        <div class="event-month">OCT</div>
+                        <div class="event-day">21</div>
+                        <div class="event-year">2025</div>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-venue">London • O2 Forum Kentish Town</h3>
+                        <h4 class="event-artist">Connor Price</h4>
+                        <p class="event-time">Tuesday Doors: 19:00 Curfew: 23:00</p>
+                        <p class="event-location">Graham</p>
+                    </div>
+                    <div class="event-arrow">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <!-- Share Section -->
+            <div class="share">
+                <h3 class="share-title">Share</h3>
+                <div class="share-buttons">
+                    <div class="share-btn facebook">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </div>
+                    <div class="share-btn twitter">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </div>
+                    <div class="share-btn other">
+                        <div style="width: 16px; height: 16px; background-color: white; border-radius: 2px;"></div>
+                    </div>
+                    <div class="share-btn other">
+                        <div style="display: flex; gap: 2px;">
+                            <div style="width: 3px; height: 3px; background-color: white; border-radius: 50%;"></div>
+                            <div style="width: 3px; height: 3px; background-color: white; border-radius: 50%;"></div>
+                            <div style="width: 3px; height: 3px; background-color: white; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Category -->
+            <div class="category">
+                <p><strong>Category:</strong> <a href="#" class="category-link">Alternative And Indie</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Expandable Sections -->
+            <div class="footer-section">
+                <button class="footer-toggle" onclick="toggleFooterSection('tickets', this)">
+                    <span class="footer-title">Buy Concert Tickets</span>
+                    <svg class="footer-plus" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                </button>
+                <div class="footer-content" id="tickets-content">
+                    <p>Find and purchase tickets for concerts and events worldwide.</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <button class="footer-toggle" onclick="toggleFooterSection('livenation', this)">
+                    <span class="footer-title">Live Nation</span>
+                    <svg class="footer-plus" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                </button>
+                <div class="footer-content" id="livenation-content">
+                    <p>About Live Nation Entertainment and our services.</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <button class="footer-toggle" onclick="toggleFooterSection('partners', this)">
+                    <span class="footer-title">Live Nation Partners</span>
+                    <svg class="footer-plus" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                </button>
+                <div class="footer-content" id="partners-content">
+                    <p>Information about our partners and collaborations.</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <button class="footer-toggle" onclick="toggleFooterSection('festivals', this)">
+                    <span class="footer-title">Festivals</span>
+                    <svg class="footer-plus" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                </button>
+                <div class="footer-content" id="festivals-content">
+                    <p>Discover music festivals and multi-day events.</p>
+                </div>
+            </div>
+            <!-- Country Selection -->
+            <div class="country-section">
+                <h3 class="footer-title">Live Nation International</h3>
+                <select class="country-select" onchange="changeCountry(this.value)">
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                </select>
+            </div>
+            <!-- Social Media -->
+            <div class="social-section">
+                <h3 class="footer-title">Follow Live Nation</h3>
+                <div class="social-icons">
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    </svg>
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.017z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName, element) {
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            element.classList.add('active');
+            
+            // Here you would typically load different content based on the tab
+            console.log('Switched to tab:', tabName);
+        }
+        // Footer section toggle functionality
+        function toggleFooterSection(sectionId, button) {
+            const content = document.getElementById(sectionId + '-content');
+            const plusIcon = button.querySelector('.footer-plus');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                plusIcon.classList.remove('rotated');
+            } else {
+                content.classList.add('expanded');
+                plusIcon.classList.add('rotated');
+            }
+        }
+        // Country selection functionality
+        function changeCountry(country) {
+            console.log('Changed country to:', country);
+            // Here you would typically redirect or load content for the selected country
+        }
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        // Add click handlers for social media icons
+        document.querySelectorAll('.social-icon').forEach((icon, index) => {
+            icon.addEventListener('click', function() {
+                const socialPlatforms = ['Facebook', 'Twitter', 'YouTube', 'Instagram', 'TikTok'];
+                console.log('Clicked on:', socialPlatforms[index]);
+                // Here you would typically open the social media page
+            });
+        });
+        // Add click handlers for share buttons
+        document.querySelectorAll('.share-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                const platforms = ['Facebook', 'Twitter', 'Link', 'More'];
+                console.log('Share on:', platforms[index]);
+                // Here you would typically open sharing dialog
+            });
+        });
+        // Add responsive menu toggle for mobile (if needed)
+        function toggleMobileMenu() {
+            // Implementation for mobile menu toggle
+            console.log('Mobile menu toggled');
+        }
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Live Nation website loaded');
+            
+            // Add any initialization code here
+            // For example, loading event data, user preferences, etc.
+        });
+    </script>
+</body>
+</html>
